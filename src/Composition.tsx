@@ -1,3 +1,1 @@
-export const MyComposition = () => {
-  return null;
-};
+export {SokuSnsLogoVertical as MyComposition} from './compositions/SokuSnsLogoVertical';
