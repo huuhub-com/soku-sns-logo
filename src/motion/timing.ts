@@ -5,24 +5,24 @@ export const TIMING = {
   splitFoldStart: 15,
   splitFoldEnd: 24,
 
-  enLiftStart: 24,
-  enLiftEnd: 30,
-  enSettleEnd: 33,
-
-  copyStart: 18,
   copyLineDrawStart: 18,
   copyLineDrawEnd: 23,
+
+  enLiftStart: 24,
+  enLiftEnd: 39,
+  enSettleEnd: 42,
+
   copyRevealStart: 24,
-  copyRevealEnd: 33,
-  copyLineFadeStart: 33,
-  copyLineFadeEnd: 36,
-  copyEnd: 36,
+  copyRevealEnd: 39,
 
-  wordmarkStart: 38,
-  wordmarkEnd: 54,
-  taglineStart: 44,
-  taglineEnd: 60,
+  copyLineFadeStart: 40,
+  copyLineFadeEnd: 46,
 
-  finalHoldStart: 60,
+  wordmarkStart: 42,
+  wordmarkEnd: 58,
+  taglineStart: 48,
+  taglineEnd: 64,
+
+  finalHoldStart: 70,
   duration: 150,
 } as const;
