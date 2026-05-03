@@ -15,8 +15,8 @@ export const TIMING = {
   copyRevealStart: 24,
   copyRevealEnd: 39,
 
-  copyLineEraseStart: 34,
-  copyLineEraseEnd: 43,
+  copyLineEraseStart: 30,
+  copyLineEraseEnd: 36,
 
   wordmarkStart: 42,
   wordmarkEnd: 57,
