@@ -28,20 +28,20 @@ const segmentT = (frame: number, start: number, end: number): number => {
 };
 
 export const getCubeMorphGeometry = (frame: number): CubeMorphGeometry => {
-  if (frame < 8) {
-    const t = segmentT(frame, 0, 8);
+  if (frame < 4) {
+    const t = segmentT(frame, 0, 4);
     return { topPath: quadToPath(lerpQuad(KF_0001.top, KF_0005.top, t)), sidePath: quadToPath(lerpQuad(KF_0001.side, KF_0005.side, t)), frontPath: quadToPath(lerpQuad(KF_0001.front, KF_0005.front, t)), splitLeftPath: null, splitRightPath: null, topOpacity: 1, sideOpacity: 1, frontOpacity: 1, splitOpacity: 0 };
   }
-  if (frame < 16) {
-    const t = segmentT(frame, 8, 16);
+  if (frame < 8) {
+    const t = segmentT(frame, 4, 8);
     return { topPath: quadToPath(lerpQuad(KF_0005.top, KF_0010.top, t)), sidePath: quadToPath(lerpQuad(KF_0005.side, KF_0010.side, t)), frontPath: quadToPath(lerpQuad(KF_0005.front, KF_0010.front, t)), splitLeftPath: null, splitRightPath: null, topOpacity: 1, sideOpacity: 1, frontOpacity: 1, splitOpacity: 0 };
   }
-  if (frame < 24) {
-    const t = segmentT(frame, 16, 24);
-    return { topPath: quadToPath(lerpQuad(KF_0010.top, KF_0015.top, t)), sidePath: quadToPath(lerpQuad(KF_0010.side, KF_0015_SIDE_DEGENERATE, t)), frontPath: quadToPath(lerpQuad(KF_0010.front, KF_0015.front, t)), splitLeftPath: null, splitRightPath: null, topOpacity: 1, sideOpacity: clampInterpolate(frame, [16, 24], [1, 0], soft), frontOpacity: 1, splitOpacity: 0 };
+  if (frame < 12) {
+    const t = segmentT(frame, 8, 12);
+    return { topPath: quadToPath(lerpQuad(KF_0010.top, KF_0015.top, t)), sidePath: quadToPath(lerpQuad(KF_0010.side, KF_0015_SIDE_DEGENERATE, t)), frontPath: quadToPath(lerpQuad(KF_0010.front, KF_0015.front, t)), splitLeftPath: null, splitRightPath: null, topOpacity: 1, sideOpacity: clampInterpolate(frame, [8, 12], [1, 0], soft), frontOpacity: 1, splitOpacity: 0 };
   }
-  if (frame < TIMING.cubeEnd) {
-    const t = segmentT(frame, 24, TIMING.cubeEnd);
+  if (frame < 15) {
+    const t = segmentT(frame, 12, 15);
     return { topPath: null, sidePath: null, frontPath: null, splitLeftPath: quadToPath(lerpQuad(KF_0015.top, KF_0020.left, t)), splitRightPath: quadToPath(lerpQuad(KF_0015.front, KF_0020.right, t)), topOpacity: 0, sideOpacity: 0, frontOpacity: 0, splitOpacity: 1 };
   }
   const splitOpacity = frame < TIMING.splitFadeStart ? 1 : clampInterpolate(frame, [TIMING.splitFadeStart, TIMING.splitFadeEnd], [1, 0], cubic);
