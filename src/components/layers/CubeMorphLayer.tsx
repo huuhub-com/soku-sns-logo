@@ -1,11 +1,23 @@
 import React from "react";
 import type {CubeMorphGeometry} from "../../motion/geometry/cubeGeometry";
+import type {SplitPanelMotion} from "../../motion/types";
+
+const SPLIT_LEFT_TOP_RIGHT = {
+  x: 522.05899,
+  y: 748.88032,
+};
+
+const SPLIT_RIGHT_BOTTOM_LEFT = {
+  x: 541.40976,
+  y: 981.09043,
+};
 
 export const CubeMorphLayer: React.FC<{
   geometry: CubeMorphGeometry;
   splitScale: number;
   splitBlurPx: number;
-}> = ({geometry, splitScale, splitBlurPx}) => {
+  splitPanel: SplitPanelMotion;
+}> = ({geometry, splitScale, splitBlurPx, splitPanel}) => {
   return (
     <g
       id="cube_morph"
@@ -25,10 +37,30 @@ export const CubeMorphLayer: React.FC<{
         <path id="cube_morph_front" d={geometry.frontPath} fill="#2b2b2b" opacity={geometry.frontOpacity} />
       ) : null}
       {geometry.splitLeftPath ? (
-        <path id="cube_morph_split_left" d={geometry.splitLeftPath} fill="#111111" opacity={geometry.splitOpacity} />
+        <g
+          id="cube_morph_split_left_fold"
+          style={{
+            transformBox: "view-box",
+            transformOrigin: `${SPLIT_LEFT_TOP_RIGHT.x}px ${SPLIT_LEFT_TOP_RIGHT.y}px`,
+            transform: `scaleX(${splitPanel.leftScaleX})`,
+            opacity: geometry.splitOpacity * splitPanel.opacity,
+          }}
+        >
+          <path id="cube_morph_split_left" d={geometry.splitLeftPath} fill="#111111" />
+        </g>
       ) : null}
       {geometry.splitRightPath ? (
-        <path id="cube_morph_split_right" d={geometry.splitRightPath} fill="#111111" opacity={geometry.splitOpacity} />
+        <g
+          id="cube_morph_split_right_fold"
+          style={{
+            transformBox: "view-box",
+            transformOrigin: `${SPLIT_RIGHT_BOTTOM_LEFT.x}px ${SPLIT_RIGHT_BOTTOM_LEFT.y}px`,
+            transform: `scaleX(${splitPanel.rightScaleX})`,
+            opacity: geometry.splitOpacity * splitPanel.opacity,
+          }}
+        >
+          <path id="cube_morph_split_right" d={geometry.splitRightPath} fill="#111111" />
+        </g>
       ) : null}
     </g>
   );
