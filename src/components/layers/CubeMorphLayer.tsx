@@ -36,6 +36,8 @@ export const CubeMorphLayer: React.FC<{
       {geometry.frontPath ? (
         <path id="cube_morph_front" d={geometry.frontPath} fill="#2b2b2b" opacity={geometry.frontOpacity} />
       ) : null}
+      {/* Stable 2D hinge-collapse simulation. */}
+      {/* The split panels narrow toward their hinge points to read as thin sheets folding edge-on. */}
       {geometry.splitLeftPath ? (
         <g
           id="cube_morph_split_left_fold"

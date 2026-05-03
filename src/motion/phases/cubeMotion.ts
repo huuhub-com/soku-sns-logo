@@ -51,18 +51,6 @@ export const getCubeMotion = (frame: number): CubeMotion => {
         [1, 0.02],
         sharp,
       ),
-      leftRotateYDeg: clampInterpolate(
-        frame,
-        [TIMING.splitFoldStart, TIMING.splitFoldEnd],
-        [0, 90],
-        sharp,
-      ),
-      rightRotateYDeg: clampInterpolate(
-        frame,
-        [TIMING.splitFoldStart, TIMING.splitFoldEnd],
-        [0, -90],
-        sharp,
-      ),
     },
   };
 };

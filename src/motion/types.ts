@@ -5,8 +5,6 @@ export type SplitPanelMotion = {
   opacity: number;
   leftScaleX: number;
   rightScaleX: number;
-  leftRotateYDeg: number;
-  rightRotateYDeg: number;
 };
 
 export type CubeMotion = {
