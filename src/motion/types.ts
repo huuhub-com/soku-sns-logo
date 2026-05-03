@@ -36,14 +36,14 @@ export type CopyMotion = {
   secondaryReveal: number;
   secondaryTranslateY: number;
   lineScaleX: number;
-  lineOpacity: number;
+  lineEraseProgress: number;
 };
 
 export type WordmarkMotion = {
-  wordmarkOpacity: number;
+  wordmarkReveal: number;
   wordmarkScale: number;
   wordmarkTranslateY: number;
-  taglineOpacity: number;
+  taglineReveal: number;
   taglineTranslateY: number;
 };
 
