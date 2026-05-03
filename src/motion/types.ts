@@ -1,14 +1,12 @@
 import type {CubeMorphGeometry} from "./geometry/cubeGeometry";
 
+import type {Quad} from "./geometry/polygon";
+
 export type SplitPanelMotion = {
   foldProgress: number;
   opacity: number;
-  leftScaleX: number;
-  rightScaleX: number;
-  leftSkewYDeg: number;
-  rightSkewYDeg: number;
-  leftRotateDeg: number;
-  rightRotateDeg: number;
+  leftQuad: Quad;
+  rightQuad: Quad;
 };
 
 export type CubeMotion = {
