@@ -1,4 +1,4 @@
-import {clampInterpolate, sharp, soft} from "../../lib/animation";
+import {clampInterpolate, soft} from "../../lib/animation";
 import {getCubeMorphGeometry} from "../geometry/cubeGeometry";
 import {TIMING} from "../timing";
 import {CubeMotion} from "../types";
@@ -10,12 +10,14 @@ export const getCubeMotion = (frame: number): CubeMotion => {
     frame,
     [TIMING.splitFoldStart, TIMING.splitFoldEnd],
     [0, 1],
-    sharp,
+    soft,
   );
+
+  const foldPeel = foldProgress * foldProgress * (3 - 2 * foldProgress);
 
   const foldEdgeOpacity = clampInterpolate(
     frame,
-    [TIMING.splitFoldEnd - 1, TIMING.splitFoldEnd],
+    [TIMING.splitFoldEnd - 1.2, TIMING.splitFoldEnd],
     [1, 0],
     soft,
   );
@@ -39,18 +41,12 @@ export const getCubeMotion = (frame: number): CubeMotion => {
     splitPanel: {
       foldProgress,
       opacity: foldEdgeOpacity,
-      leftScaleX: clampInterpolate(
-        frame,
-        [TIMING.splitFoldStart, TIMING.splitFoldEnd],
-        [1, 0.02],
-        sharp,
-      ),
-      rightScaleX: clampInterpolate(
-        frame,
-        [TIMING.splitFoldStart, TIMING.splitFoldEnd],
-        [1, 0.02],
-        sharp,
-      ),
+      leftScaleX: 1 - 0.98 * foldPeel,
+      rightScaleX: 1 - 0.98 * foldPeel,
+      leftSkewYDeg: -8 * foldPeel,
+      rightSkewYDeg: 8 * foldPeel,
+      leftRotateDeg: -10 * foldPeel,
+      rightRotateDeg: 10 * foldPeel,
     },
   };
 };

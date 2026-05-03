@@ -36,15 +36,14 @@ export const CubeMorphLayer: React.FC<{
       {geometry.frontPath ? (
         <path id="cube_morph_front" d={geometry.frontPath} fill="#2b2b2b" opacity={geometry.frontOpacity} />
       ) : null}
-      {/* Stable 2D hinge-collapse simulation. */}
-      {/* The split panels narrow toward their hinge points to read as thin sheets folding edge-on. */}
+      {/* 2D flap-fold simulation around diagonal-corner hinges. */}
       {geometry.splitLeftPath ? (
         <g
           id="cube_morph_split_left_fold"
           style={{
             transformBox: "view-box",
             transformOrigin: `${SPLIT_LEFT_TOP_RIGHT.x}px ${SPLIT_LEFT_TOP_RIGHT.y}px`,
-            transform: `scaleX(${splitPanel.leftScaleX})`,
+            transform: `rotate(${splitPanel.leftRotateDeg}deg) skewY(${splitPanel.leftSkewYDeg}deg) scaleX(${splitPanel.leftScaleX})`,
             opacity: geometry.splitOpacity * splitPanel.opacity,
           }}
         >
@@ -57,7 +56,7 @@ export const CubeMorphLayer: React.FC<{
           style={{
             transformBox: "view-box",
             transformOrigin: `${SPLIT_RIGHT_BOTTOM_LEFT.x}px ${SPLIT_RIGHT_BOTTOM_LEFT.y}px`,
-            transform: `scaleX(${splitPanel.rightScaleX})`,
+            transform: `rotate(${splitPanel.rightRotateDeg}deg) skewY(${splitPanel.rightSkewYDeg}deg) scaleX(${splitPanel.rightScaleX})`,
             opacity: geometry.splitOpacity * splitPanel.opacity,
           }}
         >
