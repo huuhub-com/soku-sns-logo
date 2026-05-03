@@ -2,11 +2,17 @@ import {clampInterpolate, sharp, soft} from "../../lib/animation";
 import {TIMING} from "../timing";
 import {EnMotion} from "../types";
 
-const EN_MAIN_LIFT_Y = -18;
+const EN_MAIN_TO_REFLECTION_LOCAL_OFFSET_Y = 648.10567;
 
 export const getEnMotion = (frame: number): EnMotion => {
   const targetOpacity = frame < TIMING.cubeEnd ? 0 : 1;
-  const liftProgress = clampInterpolate(frame, [TIMING.enLiftStart, TIMING.enLiftEnd], [0, 1], soft);
+  const liftProgress = clampInterpolate(
+    frame,
+    [TIMING.enLiftStart, TIMING.enLiftEnd],
+    [0, 1],
+    soft,
+  );
+
   const mainTranslateY =
     frame < TIMING.enLiftStart
       ? EN_MAIN_TO_REFLECTION_LOCAL_OFFSET_Y
@@ -24,6 +30,14 @@ export const getEnMotion = (frame: number): EnMotion => {
     mainTranslateY,
     reflectionOpacity: frame < TIMING.enLiftStart ? 0 : liftProgress,
     reflectionReveal: 1,
-    reflectionTranslateY: frame < TIMING.enLiftStart ? 0 : clampInterpolate(frame, [TIMING.enLiftEnd, TIMING.enSettleEnd], [6, 0], soft),
+    reflectionTranslateY:
+      frame < TIMING.enLiftStart
+        ? 0
+        : clampInterpolate(
+            frame,
+            [TIMING.enLiftEnd, TIMING.enSettleEnd],
+            [6, 0],
+            soft,
+          ),
   };
 };
