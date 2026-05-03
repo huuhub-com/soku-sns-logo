@@ -1,6 +1,12 @@
+import type {CubeMorphGeometry} from "./geometry/cubeGeometry";
+
 export type CubeMotion = {
-  cube0001Opacity:number; cube0005Opacity:number; cube0010Opacity:number; flat0015Opacity:number;
-  split0020Opacity:number; scale:number; translateY:number; rotateDeg:number; splitScale:number; splitBlurPx:number;
+  geometry: CubeMorphGeometry;
+  scale: number;
+  translateY: number;
+  rotateDeg: number;
+  splitScale: number;
+  splitBlurPx: number;
 };
 export type EnMotion = {mainOpacity:number; mainReveal:number; reflectionOpacity:number; reflectionReveal:number};
 export type CopyMotion = {
