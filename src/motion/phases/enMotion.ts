@@ -5,33 +5,25 @@ import {EnMotion} from "../types";
 const EN_MAIN_TO_REFLECTION_LOCAL_OFFSET_Y = 648.10567;
 
 export const getEnMotion = (frame: number): EnMotion => {
-  const mainOpacity = clampInterpolate(
-    frame,
-    [TIMING.splitFoldStart + 1, TIMING.splitFoldEnd],
-    [0, 1],
-    soft,
-  );
-
-  const mainTranslateY = clampInterpolate(
-    frame,
-    [TIMING.enLiftStart, TIMING.enLiftEnd],
-    [EN_MAIN_TO_REFLECTION_LOCAL_OFFSET_Y, 0],
-    sharp,
-  );
-
-  const reflectionOpacity = clampInterpolate(
-    frame,
-    [TIMING.enLiftStart, TIMING.enLiftEnd],
-    [0, 1],
-    soft,
-  );
+  const targetOpacity = frame < TIMING.cubeEnd ? 0 : 1;
+  const liftProgress = clampInterpolate(frame, [TIMING.enLiftStart, TIMING.enLiftEnd], [0, 1], soft);
+  const mainTranslateY =
+    frame < TIMING.enLiftStart
+      ? EN_MAIN_TO_REFLECTION_LOCAL_OFFSET_Y
+      : clampInterpolate(
+          frame,
+          [TIMING.enLiftStart, TIMING.enLiftEnd],
+          [EN_MAIN_TO_REFLECTION_LOCAL_OFFSET_Y, 0],
+          sharp,
+        );
 
   return {
-    mainOpacity,
+    targetOpacity,
+    mainOpacity: targetOpacity,
     mainReveal: 1,
     mainTranslateY,
-    reflectionOpacity,
+    reflectionOpacity: frame < TIMING.enLiftStart ? 0 : liftProgress,
     reflectionReveal: 1,
-    reflectionTranslateY: 0,
+    reflectionTranslateY: frame < TIMING.enLiftStart ? 0 : clampInterpolate(frame, [TIMING.enLiftEnd, TIMING.enSettleEnd], [6, 0], soft),
   };
 };
