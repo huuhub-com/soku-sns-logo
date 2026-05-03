@@ -1,5 +1,6 @@
 import React from "react";
 import {SokuSnsLogoMotion} from "../motion/types";
+import {CubeMorphLayer} from "./layers/CubeMorphLayer";
 
 export const COPY_CENTER_Y = 1146;
 
@@ -17,29 +18,11 @@ export const SokuSnsLogoArtwork: React.FC<{motion: SokuSnsLogoMotion}> = ({motio
         <clipPath id="copy-secondary-reveal"><rect x="220" y={COPY_CENTER_Y} width="660" height={copyRevealHDown} /></clipPath>
       </defs>
       <g style={{transform:`translateY(${motion.cube.translateY}px) scale(${motion.cube.scale}) rotate(${motion.cube.rotateDeg}deg)`, transformOrigin:"540px 930px"}}>
-        <g id="kf_0001_cube" style={{opacity:motion.cube.cube0001Opacity}}>
-          <path d="M 542.16652,871.6994 194.97519,679.36287 532.53477,514.279 891.0378,665.81121 Z" id="path1" fill="#111111" />
-          <path d="m 542.16652,871.6994 8.84777,402.7045 304.29641,-231.6102 35.7271,-376.98249 z" id="path2" fill="#1b1b1b" />
-          <path d="M 542.16652,871.6994 194.97519,679.36287 235.63018,1057.5774 551.01429,1274.4039" id="path4" fill="#2b2b2b" />
-        </g>
-        <g id="kf_0005_cube" style={{opacity:motion.cube.cube0005Opacity}}>
-          <path d="M 634.48997,884.96752 179.815,769.73309 425.31443,538.63796 844.91806,615.0434 Z" id="path5" fill="#111111" />
-          <path d="m 634.48997,884.9675 44.46546,358.855 184.12458,-283.0759 -18.16195,-345.7032" id="path6" fill="#1b1b1b" />
-          <path d="M 634.48997,884.9675 179.815,769.73307 l 90.80974,341.94563 408.33069,132.1438" id="path7" fill="#2b2b2b" />
-        </g>
-        <g id="kf_0010_cube" style={{opacity:motion.cube.cube0010Opacity}}>
-          <path d="M 733.26532,920.33538 270.93761,904.39304 343.5638,633.37335 770.4641,638.68746" id="path8" fill="#111111" />
-          <path d="M 733.26532,920.33538 759.83587,1109.8719 791.72055,842.39507 770.4641,638.68746" id="path9" fill="#2c2c2c" />
-          <path d="m 270.93761,904.39304 77.9403,184.22246 410.95796,21.2564 -26.57055,-189.53652" id="path10" fill="#2b2b2b" />
-        </g>
-        <g id="kf_0015_flat" style={{opacity:motion.cube.flat0015Opacity}}>
-          <path d="m 359.50613,717.51344 -8.85685,246.22046 395.01563,0.8856 -1.77136,-248.87742" id="path11" fill="#111111" />
-          <path d="m 350.64928,963.7339 30.99898,48.7127 356.04549,0.8858 7.97116,-48.7129" id="path12" fill="#2b2b2b" />
-        </g>
-        <g id="kf_0020_split" style={{opacity:motion.cube.split0020Opacity, transform:`scale(${motion.cube.splitScale})`, transformOrigin:"540px 860px", filter:`blur(${motion.cube.splitBlurPx}px)`}}>
-          <path d="m 362.04705,749.08041 -0.0115,232.01002 h 159.96534 l 0.0581,-232.21011" id="path13" fill="#111111" />
-          <path d="m 541.38676,751.35515 0.023,229.73528 H 728.7443 l 0.001,-229.73522" id="path14" fill="#111111" />
-        </g>
+        <CubeMorphLayer
+          geometry={motion.cube.geometry}
+          splitScale={motion.cube.splitScale}
+          splitBlurPx={motion.cube.splitBlurPx}
+        />
       </g>
       <g id="target_en">
         <g id="en_main" style={{opacity:motion.en.mainOpacity, transform:`translateY(${12*(1-motion.en.mainReveal)}px)`}} clipPath="url(#en-main-reveal)">
