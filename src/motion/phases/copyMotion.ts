@@ -1,4 +1,4 @@
-import {clampInterpolate, easeInExpo, easeOutExpo} from '../../lib/animation';
+import {clampInterpolate, sharp, easeOutExpo} from '../../lib/animation';
 import {TIMING} from '../timing';
 import {CopyMotion} from '../types';
 
@@ -21,7 +21,7 @@ export const getCopyMotion = (frame: number): CopyMotion => {
     frame,
     [TIMING.copyLineEraseStart, TIMING.copyLineEraseEnd],
     [0, 1],
-    easeInExpo,
+    sharp,
   );
 
   return {
