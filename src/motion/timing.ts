@@ -15,14 +15,14 @@ export const TIMING = {
   copyRevealStart: 24,
   copyRevealEnd: 39,
 
-  copyLineFadeStart: 40,
-  copyLineFadeEnd: 46,
+  copyLineEraseStart: 34,
+  copyLineEraseEnd: 43,
 
   wordmarkStart: 42,
-  wordmarkEnd: 58,
+  wordmarkEnd: 57,
   taglineStart: 48,
-  taglineEnd: 64,
+  taglineEnd: 66,
 
-  finalHoldStart: 70,
+  finalHoldStart: 72,
   duration: 150,
 } as const;

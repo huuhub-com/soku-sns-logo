@@ -17,15 +17,12 @@ export const getCopyMotion = (frame: number): CopyMotion => {
     easeOutExpo,
   );
 
-  const lineOpacity =
-    frame < TIMING.copyLineFadeStart
-      ? 1
-      : clampInterpolate(
-          frame,
-          [TIMING.copyLineFadeStart, TIMING.copyLineFadeEnd],
-          [1, 0],
-          easeOutExpo,
-        );
+  const lineEraseProgress = clampInterpolate(
+    frame,
+    [TIMING.copyLineEraseStart, TIMING.copyLineEraseEnd],
+    [0, 1],
+    easeOutExpo,
+  );
 
   return {
     primaryOpacity: 1,
@@ -35,6 +32,6 @@ export const getCopyMotion = (frame: number): CopyMotion => {
     secondaryReveal: copyRevealProgress,
     secondaryTranslateY: -10 * (1 - copyRevealProgress),
     lineScaleX,
-    lineOpacity,
+    lineEraseProgress,
   };
 };
