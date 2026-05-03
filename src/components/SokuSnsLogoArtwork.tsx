@@ -3,17 +3,30 @@ import {SokuSnsLogoMotion} from "../motion/types";
 import {CubeMorphLayer} from "./layers/CubeMorphLayer";
 
 export const COPY_CENTER_Y = 1146;
+const EN_MAIN_CLIP = {
+  x: 300,
+  y: 300,
+  width: 520,
+  height: 520,
+};
+
+const EN_REFLECTION_CLIP = {
+  x: 300,
+  y: 820,
+  width: 520,
+  height: 360,
+};
 
 export const SokuSnsLogoArtwork: React.FC<{motion: SokuSnsLogoMotion}> = ({motion}) => {
-  const enRevealY = 1080 - 1080 * motion.en.mainReveal;
-  const reflRevealH = 1080 * motion.en.reflectionReveal;
+  const enRevealY = EN_MAIN_CLIP.y + EN_MAIN_CLIP.height * (1 - motion.en.mainReveal);
+  const reflRevealH = EN_REFLECTION_CLIP.height * motion.en.reflectionReveal;
   const copyRevealHUp = 180 * motion.copy.primaryReveal;
   const copyRevealHDown = 180 * motion.copy.secondaryReveal;
   return (
     <svg viewBox="0 0 1080 1920" width="1080" height="1920" style={{position:"absolute", inset:0}}>
       <defs>
-        <clipPath id="en-main-reveal"><rect x="240" y={enRevealY} width="620" height={1080 * motion.en.mainReveal} /></clipPath>
-        <clipPath id="en-ref-reveal"><rect x="240" y="840" width="620" height={reflRevealH} /></clipPath>
+        <clipPath id="en-main-reveal"><rect x={EN_MAIN_CLIP.x} y={enRevealY} width={EN_MAIN_CLIP.width} height={EN_MAIN_CLIP.height * motion.en.mainReveal} /></clipPath>
+        <clipPath id="en-ref-reveal"><rect x={EN_REFLECTION_CLIP.x} y={EN_REFLECTION_CLIP.y} width={EN_REFLECTION_CLIP.width} height={reflRevealH} /></clipPath>
         <clipPath id="copy-primary-reveal"><rect x="220" y={COPY_CENTER_Y - copyRevealHUp} width="660" height={copyRevealHUp} /></clipPath>
         <clipPath id="copy-secondary-reveal"><rect x="220" y={COPY_CENTER_Y} width="660" height={copyRevealHDown} /></clipPath>
       </defs>
