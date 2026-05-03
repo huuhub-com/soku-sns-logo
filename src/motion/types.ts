@@ -22,6 +22,7 @@ export type CubeMotion = {
 };
 
 export type EnMotion = {
+  targetOpacity: number;
   mainOpacity: number;
   mainReveal: number;
   mainTranslateY: number;

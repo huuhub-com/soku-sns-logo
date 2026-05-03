@@ -5,26 +5,25 @@ import {EnMotion} from "../types";
 const EN_MAIN_LIFT_Y = -18;
 
 export const getEnMotion = (frame: number): EnMotion => {
-  const mainTranslateY = clampInterpolate(
-    frame,
-    [TIMING.enLiftStart, TIMING.enLiftEnd],
-    [0, EN_MAIN_LIFT_Y],
-    sharp,
-  );
-
-  const reflectionOpacity = clampInterpolate(
-    frame,
-    [TIMING.enSettleEnd - 6, TIMING.enSettleEnd],
-    [0.45, 1],
-    soft,
-  );
+  const targetOpacity = frame < TIMING.cubeEnd ? 0 : 1;
+  const liftProgress = clampInterpolate(frame, [TIMING.enLiftStart, TIMING.enLiftEnd], [0, 1], soft);
+  const mainTranslateY =
+    frame < TIMING.enLiftStart
+      ? EN_MAIN_TO_REFLECTION_LOCAL_OFFSET_Y
+      : clampInterpolate(
+          frame,
+          [TIMING.enLiftStart, TIMING.enLiftEnd],
+          [EN_MAIN_TO_REFLECTION_LOCAL_OFFSET_Y, 0],
+          sharp,
+        );
 
   return {
-    mainOpacity: 1,
+    targetOpacity,
+    mainOpacity: targetOpacity,
     mainReveal: 1,
     mainTranslateY,
-    reflectionOpacity,
+    reflectionOpacity: frame < TIMING.enLiftStart ? 0 : liftProgress,
     reflectionReveal: 1,
-    reflectionTranslateY: clampInterpolate(frame, [TIMING.enLiftEnd, TIMING.enSettleEnd], [6, 0], soft),
+    reflectionTranslateY: frame < TIMING.enLiftStart ? 0 : clampInterpolate(frame, [TIMING.enLiftEnd, TIMING.enSettleEnd], [6, 0], soft),
   };
 };
