@@ -1,3 +1,9 @@
+npx remotion render SokuSnsLogoVertical out/soku-sns-logo.mp4 --codec=h264 --crf=18
+
+git log --oneline -n 10
+git reset --hard b503a5c
+git push origin main --force
+
 # Remotion video
 
 <p align="center">
