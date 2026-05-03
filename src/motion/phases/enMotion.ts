@@ -1,10 +1,37 @@
-import {clampInterpolate, sharp, soft} from '../../lib/animation';
-import {TIMING} from '../timing';
-import {EnMotion} from '../types';
+import {clampInterpolate, sharp, soft} from "../../lib/animation";
+import {TIMING} from "../timing";
+import {EnMotion} from "../types";
 
-export const getEnMotion = (frame:number): EnMotion => ({
-  mainOpacity: clampInterpolate(frame,[TIMING.enMainRevealStart,48],[0,1],soft),
-  mainReveal: clampInterpolate(frame,[TIMING.enMainRevealStart,TIMING.enMainRevealEnd],[0,1],sharp),
-  reflectionOpacity: clampInterpolate(frame,[TIMING.enReflectionRevealStart,58],[0,0.8],soft),
-  reflectionReveal: clampInterpolate(frame,[TIMING.enReflectionRevealStart,TIMING.enReflectionRevealEnd],[0,1],sharp),
-});
+const EN_MAIN_TO_REFLECTION_LOCAL_OFFSET_Y = 648.10567;
+
+export const getEnMotion = (frame: number): EnMotion => {
+  const mainOpacity = clampInterpolate(
+    frame,
+    [TIMING.splitFoldStart + 1, TIMING.splitFoldEnd],
+    [0, 1],
+    soft,
+  );
+
+  const mainTranslateY = clampInterpolate(
+    frame,
+    [TIMING.enLiftStart, TIMING.enLiftEnd],
+    [EN_MAIN_TO_REFLECTION_LOCAL_OFFSET_Y, 0],
+    sharp,
+  );
+
+  const reflectionOpacity = clampInterpolate(
+    frame,
+    [TIMING.enLiftStart, TIMING.enLiftEnd],
+    [0, 1],
+    soft,
+  );
+
+  return {
+    mainOpacity,
+    mainReveal: 1,
+    mainTranslateY,
+    reflectionOpacity,
+    reflectionReveal: 1,
+    reflectionTranslateY: 0,
+  };
+};

@@ -1,5 +1,12 @@
 import type {CubeMorphGeometry} from "./geometry/cubeGeometry";
 
+export type SplitPanelMotion = {
+  foldProgress: number;
+  opacity: number;
+  leftScaleX: number;
+  rightScaleX: number;
+};
+
 export type CubeMotion = {
   geometry: CubeMorphGeometry;
   scale: number;
@@ -7,12 +14,40 @@ export type CubeMotion = {
   rotateDeg: number;
   splitScale: number;
   splitBlurPx: number;
+  splitPanel: SplitPanelMotion;
 };
-export type EnMotion = {mainOpacity:number; mainReveal:number; reflectionOpacity:number; reflectionReveal:number};
+
+export type EnMotion = {
+  mainOpacity: number;
+  mainReveal: number;
+  mainTranslateY: number;
+  reflectionOpacity: number;
+  reflectionReveal: number;
+  reflectionTranslateY: number;
+};
+
 export type CopyMotion = {
-  primaryOpacity:number; primaryReveal:number; primaryTranslateY:number;
-  secondaryOpacity:number; secondaryReveal:number; secondaryTranslateY:number;
-  lineScaleX:number; lineOpacity:number;
+  primaryOpacity: number;
+  primaryReveal: number;
+  primaryTranslateY: number;
+  secondaryOpacity: number;
+  secondaryReveal: number;
+  secondaryTranslateY: number;
+  lineScaleX: number;
+  lineOpacity: number;
 };
-export type WordmarkMotion = {wordmarkOpacity:number; wordmarkScale:number; wordmarkTranslateY:number; taglineOpacity:number; taglineTranslateY:number};
-export type SokuSnsLogoMotion = {cube:CubeMotion; en:EnMotion; copy:CopyMotion; wordmark:WordmarkMotion};
+
+export type WordmarkMotion = {
+  wordmarkOpacity: number;
+  wordmarkScale: number;
+  wordmarkTranslateY: number;
+  taglineOpacity: number;
+  taglineTranslateY: number;
+};
+
+export type SokuSnsLogoMotion = {
+  cube: CubeMotion;
+  en: EnMotion;
+  copy: CopyMotion;
+  wordmark: WordmarkMotion;
+};

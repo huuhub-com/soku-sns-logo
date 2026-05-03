@@ -1,5 +1,4 @@
-import {clampInterpolate, soft, cubic} from "../../lib/animation";
-import {TIMING} from "../timing";
+import {clampInterpolate, soft} from "../../lib/animation";
 import {lerpQuad, quadToPath, type Quad} from "./polygon";
 
 export type CubeMorphGeometry = {
@@ -44,6 +43,5 @@ export const getCubeMorphGeometry = (frame: number): CubeMorphGeometry => {
     const t = segmentT(frame, 12, 15);
     return { topPath: null, sidePath: null, frontPath: null, splitLeftPath: quadToPath(lerpQuad(KF_0015.top, KF_0020.left, t)), splitRightPath: quadToPath(lerpQuad(KF_0015.front, KF_0020.right, t)), topOpacity: 0, sideOpacity: 0, frontOpacity: 0, splitOpacity: 1 };
   }
-  const splitOpacity = frame < TIMING.splitFadeStart ? 1 : clampInterpolate(frame, [TIMING.splitFadeStart, TIMING.splitFadeEnd], [1, 0], cubic);
-  return { topPath: null, sidePath: null, frontPath: null, splitLeftPath: quadToPath(KF_0020.left), splitRightPath: quadToPath(KF_0020.right), topOpacity: 0, sideOpacity: 0, frontOpacity: 0, splitOpacity };
+  return { topPath: null, sidePath: null, frontPath: null, splitLeftPath: quadToPath(KF_0020.left), splitRightPath: quadToPath(KF_0020.right), topOpacity: 0, sideOpacity: 0, frontOpacity: 0, splitOpacity: 1 };
 };
