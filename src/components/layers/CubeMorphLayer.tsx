@@ -1,16 +1,7 @@
 import React from "react";
 import type {CubeMorphGeometry} from "../../motion/geometry/cubeGeometry";
+import {quadToPath} from "../../motion/geometry/polygon";
 import type {SplitPanelMotion} from "../../motion/types";
-
-const SPLIT_LEFT_TOP_RIGHT = {
-  x: 522.05899,
-  y: 748.88032,
-};
-
-const SPLIT_RIGHT_BOTTOM_LEFT = {
-  x: 541.40976,
-  y: 981.09043,
-};
 
 export const CubeMorphLayer: React.FC<{
   geometry: CubeMorphGeometry;
@@ -36,32 +27,21 @@ export const CubeMorphLayer: React.FC<{
       {geometry.frontPath ? (
         <path id="cube_morph_front" d={geometry.frontPath} fill="#2b2b2b" opacity={geometry.frontOpacity} />
       ) : null}
-      {/* 2D flap-fold simulation around diagonal-corner hinges. */}
       {geometry.splitLeftPath ? (
-        <g
-          id="cube_morph_split_left_fold"
-          style={{
-            transformBox: "view-box",
-            transformOrigin: `${SPLIT_LEFT_TOP_RIGHT.x}px ${SPLIT_LEFT_TOP_RIGHT.y}px`,
-            transform: `rotate(${splitPanel.leftRotateDeg}deg) skewY(${splitPanel.leftSkewYDeg}deg) scaleX(${splitPanel.leftScaleX})`,
-            opacity: geometry.splitOpacity * splitPanel.opacity,
-          }}
-        >
-          <path id="cube_morph_split_left" d={geometry.splitLeftPath} fill="#111111" />
-        </g>
+        <path
+          id="cube_morph_split_left"
+          d={quadToPath(splitPanel.leftQuad)}
+          fill="#111111"
+          opacity={geometry.splitOpacity * splitPanel.opacity}
+        />
       ) : null}
       {geometry.splitRightPath ? (
-        <g
-          id="cube_morph_split_right_fold"
-          style={{
-            transformBox: "view-box",
-            transformOrigin: `${SPLIT_RIGHT_BOTTOM_LEFT.x}px ${SPLIT_RIGHT_BOTTOM_LEFT.y}px`,
-            transform: `rotate(${splitPanel.rightRotateDeg}deg) skewY(${splitPanel.rightSkewYDeg}deg) scaleX(${splitPanel.rightScaleX})`,
-            opacity: geometry.splitOpacity * splitPanel.opacity,
-          }}
-        >
-          <path id="cube_morph_split_right" d={geometry.splitRightPath} fill="#111111" />
-        </g>
+        <path
+          id="cube_morph_split_right"
+          d={quadToPath(splitPanel.rightQuad)}
+          fill="#111111"
+          opacity={geometry.splitOpacity * splitPanel.opacity}
+        />
       ) : null}
     </g>
   );

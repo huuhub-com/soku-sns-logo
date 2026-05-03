@@ -1,5 +1,6 @@
 import {clampInterpolate, soft} from "../../lib/animation";
-import {getCubeMorphGeometry} from "../geometry/cubeGeometry";
+import {SPLIT_LEFT_INITIAL_QUAD, SPLIT_RIGHT_INITIAL_QUAD, getCubeMorphGeometry} from "../geometry/cubeGeometry";
+import {foldQuadAroundDiagonal} from "../geometry/panelFold";
 import {TIMING} from "../timing";
 import {CubeMotion} from "../types";
 
@@ -12,8 +13,6 @@ export const getCubeMotion = (frame: number): CubeMotion => {
     [0, 1],
     soft,
   );
-
-  const foldPeel = foldProgress * foldProgress * (3 - 2 * foldProgress);
 
   const foldEdgeOpacity = clampInterpolate(
     frame,
@@ -41,12 +40,8 @@ export const getCubeMotion = (frame: number): CubeMotion => {
     splitPanel: {
       foldProgress,
       opacity: foldEdgeOpacity,
-      leftScaleX: 1 - 0.98 * foldPeel,
-      rightScaleX: 1 - 0.98 * foldPeel,
-      leftSkewYDeg: -8 * foldPeel,
-      rightSkewYDeg: 8 * foldPeel,
-      leftRotateDeg: -10 * foldPeel,
-      rightRotateDeg: 10 * foldPeel,
+      leftQuad: foldQuadAroundDiagonal(SPLIT_LEFT_INITIAL_QUAD, foldProgress),
+      rightQuad: foldQuadAroundDiagonal(SPLIT_RIGHT_INITIAL_QUAD, foldProgress),
     },
   };
 };
