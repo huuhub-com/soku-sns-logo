@@ -13,8 +13,8 @@ export const TIMING = {
   copyLineDrawStart: 18,
   copyLineDrawEnd: 23,
   copyRevealStart: 24,
-  copyRevealEnd: 30,
-  copyLineFadeStart: 30,
+  copyRevealEnd: 33,
+  copyLineFadeStart: 33,
   copyLineFadeEnd: 36,
   copyEnd: 36,
 

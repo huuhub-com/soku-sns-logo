@@ -2,7 +2,7 @@ import React from "react";
 import {SokuSnsLogoMotion} from "../motion/types";
 import {CubeMorphLayer} from "./layers/CubeMorphLayer";
 
-export const COPY_CENTER_Y = 1146;
+export const COPY_CENTER_Y = 1134;
 
 export const SokuSnsLogoArtwork: React.FC<{motion: SokuSnsLogoMotion}> = ({motion}) => {
   const copyRevealHUp = 180 * motion.copy.primaryReveal;
