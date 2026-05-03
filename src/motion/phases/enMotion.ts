@@ -2,7 +2,7 @@ import {clampInterpolate, sharp, soft} from "../../lib/animation";
 import {TIMING} from "../timing";
 import {EnMotion} from "../types";
 
-const EN_MAIN_TO_REFLECTION_LOCAL_OFFSET_Y = 648.10567;
+const EN_MAIN_LIFT_Y = -18;
 
 export const getEnMotion = (frame: number): EnMotion => {
   const targetOpacity = frame < TIMING.cubeEnd ? 0 : 1;
