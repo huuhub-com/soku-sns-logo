@@ -4,16 +4,32 @@ import {CubeMorphLayer} from "./layers/CubeMorphLayer";
 
 export const COPY_CENTER_Y = 1146;
 
+const EN_MAIN_CLIP = {
+  x: 250,
+  y: 250,
+  width: 1550,
+  height: 1150,
+};
+
+const EN_REFLECTION_CLIP = {
+  x: 250,
+  y: 850,
+  width: 1550,
+  height: 900,
+};
+
 export const SokuSnsLogoArtwork: React.FC<{motion: SokuSnsLogoMotion}> = ({motion}) => {
-  const enRevealY = 1080 - 1080 * motion.en.mainReveal;
-  const reflRevealH = 1080 * motion.en.reflectionReveal;
+  const enRevealY =
+    EN_MAIN_CLIP.y + EN_MAIN_CLIP.height * (1 - motion.en.mainReveal);
+  const reflRevealH =
+    EN_REFLECTION_CLIP.height * motion.en.reflectionReveal;
   const copyRevealHUp = 180 * motion.copy.primaryReveal;
   const copyRevealHDown = 180 * motion.copy.secondaryReveal;
   return (
     <svg viewBox="0 0 1080 1920" width="1080" height="1920" style={{position:"absolute", inset:0}}>
       <defs>
-        <clipPath id="en-main-reveal"><rect x="240" y={enRevealY} width="620" height={1080 * motion.en.mainReveal} /></clipPath>
-        <clipPath id="en-ref-reveal"><rect x="240" y="840" width="620" height={reflRevealH} /></clipPath>
+        <clipPath id="en-main-reveal"><rect x={EN_MAIN_CLIP.x} y={enRevealY} width={EN_MAIN_CLIP.width} height={EN_MAIN_CLIP.height * motion.en.mainReveal} /></clipPath>
+        <clipPath id="en-ref-reveal"><rect x={EN_REFLECTION_CLIP.x} y={EN_REFLECTION_CLIP.y} width={EN_REFLECTION_CLIP.width} height={reflRevealH} /></clipPath>
         <clipPath id="copy-primary-reveal"><rect x="220" y={COPY_CENTER_Y - copyRevealHUp} width="660" height={copyRevealHUp} /></clipPath>
         <clipPath id="copy-secondary-reveal"><rect x="220" y={COPY_CENTER_Y} width="660" height={copyRevealHDown} /></clipPath>
       </defs>
@@ -24,7 +40,7 @@ export const SokuSnsLogoArtwork: React.FC<{motion: SokuSnsLogoMotion}> = ({motio
           splitBlurPx={motion.cube.splitBlurPx}
         />
       </g>
-      <g id="target_en">
+      <g id="target_en" transform="matrix(0.26428499,0,0,0.26428499,276.49112,506.56761)" style={{strokeWidth:0.999217, strokeDasharray:"none"}}>
         <g id="en_main" style={{opacity:motion.en.mainOpacity, transform:`translateY(${12*(1-motion.en.mainReveal)}px)`}} clipPath="url(#en-main-reveal)">
           <path d="M 309.09077,807.91998 V 292.12245 H 708.57423 V 413.97529 H 453.09867 v 77.54272 h 235.7437 v 117.69876 h -235.7437 v 76.85037 h 255.47556 v 121.85284 z m 447.94766,0 V 292.12245 h 146.77729 l 125.66078,202.51111 q 8.3081,13.15457 20.7703,36.00198 12.8084,22.50123 26.6553,48.4642 14.1931,25.96296 26.3092,48.81037 l -17.3087,40.15605 q -1.7308,-28.04 -2.7694,-63.69581 -1.0385,-36.00197 -1.7308,-69.23456 -0.3462,-33.57877 -0.3462,-54.00297 V 292.12245 h 144.0079 V 807.91998 H 1078.2868 L 960.93423,619.60196 q -10.38518,-16.96247 -25.96296,-43.27161 -15.2316,-26.65531 -32.88642,-59.19555 -17.30864,-32.54025 -34.96346,-66.46519 l 28.38618,-8.30815 q 2.76938,36.34815 3.8079,71.31161 1.38469,34.96346 1.38469,62.65728 0.34617,27.69383 0.34617,43.27161 v 188.31802 z" id="text1-1" fill="#111110" transform="matrix(1.5148526,0,0,1.6373649,-144.51017,-175.46881)" aria-label="EN" />
         </g>
