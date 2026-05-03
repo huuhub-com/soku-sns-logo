@@ -1,4 +1,4 @@
-import {clampInterpolate, sharp, soft, cubic} from "../../lib/animation";
+import {clampInterpolate, soft, cubic} from "../../lib/animation";
 import {TIMING} from "../timing";
 import {lerpQuad, quadToPath, type Quad} from "./polygon";
 
@@ -24,7 +24,7 @@ const KF_0015_SIDE_DEGENERATE: Quad = [{x:743.89355,y:715.74208},{x:745.66491,y:
 const KF_0020 = { left: [{x:362.04705,y:749.08041},{x:362.03555,y:981.09043},{x:522.00089,y:981.09043},{x:522.05899,y:748.88032}] as Quad, right: [{x:541.38676,y:751.35515},{x:541.40976,y:981.09043},{x:728.7443,y:981.09043},{x:728.7453,y:751.35521}] as Quad };
 
 const segmentT = (frame: number, start: number, end: number): number => {
-  return clampInterpolate(frame, [start, end], [0, 1], sharp);
+  return clampInterpolate(frame, [start, end], [0, 1]);
 };
 
 export const getCubeMorphGeometry = (frame: number): CubeMorphGeometry => {
