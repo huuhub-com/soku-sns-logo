@@ -6,6 +6,7 @@ const EN_MAIN_TO_REFLECTION_LOCAL_OFFSET_Y = 648.10567;
 
 export const getEnMotion = (frame: number): EnMotion => {
   const targetOpacity = frame < TIMING.cubeEnd ? 0 : 1;
+
   const liftProgress = clampInterpolate(
     frame,
     [TIMING.enLiftStart, TIMING.enLiftEnd],
